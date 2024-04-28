@@ -5,7 +5,7 @@ import { connect } from 'cloudflare:sockets';
 // How to generate your own UUID:
 // [Windows] Press "Win + R", input cmd and run:  Powershell -NoExit -Command "[guid]::NewGuid()"
 let userID = 'cb66e418-3734-4faf-9810-0e1063706bce';
-let proxyIP = "141.147.65.81";
+let proxyIP = "2606:4700:d0::08b2:9ff9:d9b3";
 
 let dohURL = 'https://sky.rethinkdns.com/1:-Pf_____9_8A_AMAIgE8kMABVDDmKOHTAKg='; // https://cloudflare-dns.com/dns-query or https://dns.google/dns-query
 
@@ -162,7 +162,7 @@ async function vlessOverWSHandler(request) {
             const {
                 hasError,
                 message,
-                portRemote = 443,
+                portRemote = 854,
                 addressRemote = '',
                 rawDataIndex,
                 vlessVersion = new Uint8Array([0, 0]),
@@ -745,7 +745,7 @@ async function handleUDPOutBound(webSocket, vlessResponseHeader, log) {
  */
 function getVLESSConfig(userID, hostName) {
     const vlessLink = `vless://${userID}@${hostName}:80?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2048#${hostName}`
-    const vlessTlsLink = `vless://${userID}@${hostName}:443?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2048#${hostName}`
+    const vlessTlsLink = `vless://${userID}@${hostName}:854?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2048#${hostName}`
     return `
 下面是非 TLS 端口的节点信息及分享链接，可使用 CF 支持的非 TLS 端口：
 
@@ -761,7 +761,7 @@ ${vlessLink}
 下面是 TLS 端口的节点信息及分享链接，可使用 CF 支持的 TLS 端口：
 
 地址：${hostName} 或 CF 优选 IP
-端口：443 或 CF 支持的 TLS 端口
+端口：854 或 CF 支持的 TLS 端口
 UUID：${userID}
 传输：ws
 传输层安全：TLS
